@@ -32,7 +32,10 @@ void UGrabber::BeginPlay()
 void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+}
 
+void UGrabber::Grab( )
+{
 	FVector Start = GetComponentLocation( );
 	FVector End = Start + GetForwardVector( ) * MaxGrabberDistance;
 
@@ -56,5 +59,10 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	{
 		UE_LOG( LogTemp, Warning, TEXT( "No Actor Hit." ) );
 	}
+}
+
+void UGrabber::Release( )
+{
+	UE_LOG( LogTemp, Warning, TEXT( "Released Grabber!" ) );
 }
 
