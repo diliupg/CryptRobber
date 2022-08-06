@@ -27,5 +27,8 @@ public:
 private:
 	UPROPERTY(EditAnywhere )
 	float MaxGrabberDistance;
-		
+	
+	UPROPERTY( EditAnywhere )
+	float GrabRadius;
+
 };
