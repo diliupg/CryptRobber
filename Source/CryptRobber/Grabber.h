@@ -37,4 +37,7 @@ private:
 	UPROPERTY( EditAnywhere )
 	float GrabRadius;
 
+	UPROPERTY(EditAnywhere )
+	float HoldDistance;
+
 };
