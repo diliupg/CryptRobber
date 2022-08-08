@@ -4,7 +4,7 @@
 #include "Grabber.h"
 #include "Engine/World.h"
 #include "DrawDebugHelpers.h"
-#include "PhysicsEngine/PhysicsHandleComponent.h"
+
 
 // Sets default values for this component's properties
 UGrabber::UGrabber() :
@@ -25,7 +25,6 @@ void UGrabber::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UPhysicsHandleComponent* PhysicsHandle = GetOwner( )->FindComponentByClass<UPhysicsHandleComponent>( );
 	/*if ( PhysicsHandle != nullptr )
 	{
 		UE_LOG( LogTemp, Warning, TEXT( "Physics HandleF O U N D !!!: %s" ), *PhysicsHandle->GetName( ) );
@@ -42,16 +41,16 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	UPhysicsHandleComponent* PhysicsHandle = GetOwner( )->FindComponentByClass<UPhysicsHandleComponent>( );
+	UPhysicsHandleComponent* PhysicsHandle = GetPhysicsHandle( );
 	if ( PhysicsHandle == nullptr ) return;
 
-	FVector TargetLocation = GetComponentLocation( ) + GetForwardVector( ) + HoldDistance;
+	FVector TargetLocation = GetComponentLocation( ) + GetForwardVector( ).GetSafeNormal() + HoldDistance;
 	PhysicsHandle->SetTargetLocationAndRotation( TargetLocation, GetComponentRotation( ) );
 }
 
 void UGrabber::Grab( )
 {
-	UPhysicsHandleComponent* PhysicsHandle = GetOwner( )->FindComponentByClass<UPhysicsHandleComponent>( );
+	UPhysicsHandleComponent* PhysicsHandle = GetPhysicsHandle( );
 	if ( PhysicsHandle == nullptr ) return;
 
 	FVector Start = GetComponentLocation( );
@@ -86,5 +85,17 @@ void UGrabber::Grab( )
 void UGrabber::Release( )
 {
 	UE_LOG( LogTemp, Warning, TEXT( "Released Grabber!" ) );
+}
+
+UPhysicsHandleComponent* UGrabber::GetPhysicsHandle( ) const
+{
+	//return GetOwner( )->FindComponentByClass<UPhysicsHandleComponent>( );
+
+	UPhysicsHandleComponent* Result = GetOwner( )->FindComponentByClass<UPhysicsHandleComponent>( );
+	if ( Result == nullptr )
+	{
+		UE_LOG( LogTemp, Warning, TEXT( "Grabber has no UPhysicsHandleComponent!" ) );
+	}
+	return Result;
 }
 
