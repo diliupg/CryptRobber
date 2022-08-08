@@ -25,22 +25,12 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UFUNCTION( BlueprintCallable )
-		void Grab( );
-
-	UFUNCTION(BlueprintCallable )
-	void Release( );
-
 private:
-	UPROPERTY(EditAnywhere )
-	float MaxGrabberDistance;
 	
 	UPROPERTY( EditAnywhere )
-	float GrabRadius;
+	float MaxGrabDistance;
 
-	UPROPERTY(EditAnywhere )
-	float HoldDistance;
-
-	UPhysicsHandleComponent* GetPhysicsHandle( ) const;
+	void PrintDamage( const float& Damage );
+	bool HasDamage( float& OutDamage );
 
 };

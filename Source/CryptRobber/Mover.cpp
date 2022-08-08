@@ -5,6 +5,8 @@
 #include "Mover.h"
 #include "Math/UnrealMathUtility.h"
 
+// mover is on the door
+// 
 // Sets default values for this component's properties
 UMover::UMover() :
 	MoveTime(4.f ),
