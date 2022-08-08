@@ -30,7 +30,7 @@ private:
 	UPROPERTY( EditAnywhere )
 	float MaxGrabDistance;
 
-	void PrintDamage( const float& Damage );
-	bool HasDamage( float& OutDamage );
+	UPROPERTY(EditAnywhere )
+	float GrabRadius;
 
 };
