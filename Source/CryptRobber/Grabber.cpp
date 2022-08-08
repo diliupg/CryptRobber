@@ -5,11 +5,9 @@
 #include "Engine/World.h"
 #include "DrawDebugHelpers.h"
 
-// Grabber is on the player as a child of the Camera
-// 
 // Sets default values for this component's properties
 UGrabber::UGrabber() :
-	MaxGrabDistance(400.f ),
+	MaxGrabDistance(500.f ),
 	GrabRadius(100.f )
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
@@ -25,6 +23,8 @@ void UGrabber::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// ...
+	
 }
 
 
@@ -33,23 +33,39 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	
+}
+
+
+void UGrabber::Grab( )
+{
 	FVector Start = GetComponentLocation( );
 	FVector End = Start + GetForwardVector( ) * MaxGrabDistance;
+
 	DrawDebugLine( GetWorld( ), Start, End, FColor::Red );
 
 	FCollisionShape Sphere = FCollisionShape::MakeSphere( GrabRadius );
 	FHitResult HitResult;
-	bool HasHit = GetWorld( )->SweepSingleByChannel(
+	bool Hashit = GetWorld( )->SweepSingleByChannel(
 		HitResult,
 		Start, End,
 		FQuat::Identity,
 		ECC_GameTraceChannel2,
 		Sphere );
-	if ( HasHit )
+	if ( Hashit )
 	{
-		AActor* HitActor = HitResult.GetActor( );
-		UE_LOG( LogTemp, Warning, TEXT( "Hit Actor; %s" ), *HitActor->GetActorNameOrLabel( ) );
+		//AActor* HitActor = HitResult.GetActor( );
+
+		UE_LOG( LogTemp, Warning, TEXT( "Hit Actor: %s" ), *HitResult.GetActor( )->GetActorNameOrLabel( ) );
+	}
+	else
+	{
+		UE_LOG( LogTemp, Warning, TEXT( "No Actor Hit." ) );
 	}
 }
 
+void UGrabber::Release( )
+{
+	UE_LOG( LogTemp, Warning, TEXT( "Grabber released." ) );
+}
 
