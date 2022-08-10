@@ -24,11 +24,11 @@ void UTriggerComponent::TickComponent( float DeltaTime, ELevelTick TickType, FAc
 	AActor* Actor = GetAcceptableActor( );
 	if ( Actor != nullptr )
 	{
-		UE_LOG( LogTemp, Warning, TEXT( "Unlocking.." ) );
+		Mover->SetShouldMove( true );
 	}
 	else
 	{
-		UE_LOG( LogTemp, Warning, TEXT( "Re-locking.." ) );
+		Mover->SetShouldMove( false );
 	}
 
 	// Unused--------------
@@ -79,6 +79,11 @@ void UTriggerComponent::TickComponent( float DeltaTime, ELevelTick TickType, FAc
 		}	
 	}*/
 	//---------------------
+}
+
+void UTriggerComponent::SetMover( UMover* NewMover )
+{
+	Mover = NewMover; 
 }
 
 AActor* UTriggerComponent::GetAcceptableActor( ) const

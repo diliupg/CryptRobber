@@ -55,4 +55,9 @@ void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponent
 	UE_LOG( LogTemp, Warning, TEXT( "Mover Owner %s is at %s" ), *Name, *LocString );*/
 }
 
+void UMover::SetShouldMove( bool NewShouldMove )
+{
+	ShouldMove = NewShouldMove;
+}
+
 
