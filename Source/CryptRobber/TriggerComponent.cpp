@@ -6,7 +6,7 @@
 UTriggerComponent::UTriggerComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
-	UE_LOG( LogTemp, Warning, TEXT( "Building..." ) );
+	UE_LOG( LogTemp, Warning, TEXT( "Building..." ) ); 
 }
 
 // Called when the game starts
@@ -20,5 +20,13 @@ void UTriggerComponent::TickComponent( float DeltaTime, ELevelTick TickType, FAc
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 
+	TArray<AActor*> Actors;
+	GetOverlappingActors( Actors );
+
+	if ( Actors.Num( ) > 0 )
+	{
+		FString ActorName = Actors [ 0 ]->GetActorNameOrLabel( );
+		UE_LOG( LogTemp, Warning, TEXT( "Overlapping : %s" ), *ActorName );
+	}
 }
 
