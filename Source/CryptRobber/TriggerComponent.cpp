@@ -3,10 +3,22 @@
 
 #include "TriggerComponent.h"
 
+UTriggerComponent::UTriggerComponent()
+{
+	PrimaryComponentTick.bCanEverTick = true;
+	UE_LOG( LogTemp, Warning, TEXT( "Building..." ) );
+}
+
 // Called when the game starts
 void UTriggerComponent::BeginPlay( )
 {
 	Super::BeginPlay( );
 
-	UE_LOG( LogTemp, Warning, TEXT( "Trigger component alive" ) );
 }
+
+void UTriggerComponent::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
+{
+	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
+
+}
+
