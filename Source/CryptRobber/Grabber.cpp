@@ -30,8 +30,10 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	UPhysicsHandleComponent* PhysicsHandle = GetPhysicsHandle( );
-	if ( PhysicsHandle == nullptr ) return;
-
+	if ( PhysicsHandle == nullptr )
+	{
+		return;
+	}
 	if ( PhysicsHandle->GetGrabbedComponent( ) != nullptr )
 	{
 		FVector TargetLocation = GetComponentLocation( ) + GetForwardVector( ) * HoldDistance;
