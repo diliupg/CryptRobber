@@ -7,7 +7,7 @@ UTriggerComponent::UTriggerComponent() :
 	AcceptableActorTag("Unlock1" )
 {
 	PrimaryComponentTick.bCanEverTick = true;
-	UE_LOG( LogTemp, Warning, TEXT( "Building..." ) ); 
+	//UE_LOG( LogTemp, Warning, TEXT( "Building..." ) ); 
 }
 
 // Called when the game starts
@@ -36,8 +36,8 @@ void UTriggerComponent::TickComponent( float DeltaTime, ELevelTick TickType, FAc
 	{
 		Mover->SetShouldMove( false );
 	}
+#pragma region Unused Code Region
 
-	// Unused--------------
 	/*TArray<AActor*> Actors;
 	GetOverlappingActors( Actors );*/
 
@@ -60,12 +60,12 @@ void UTriggerComponent::TickComponent( float DeltaTime, ELevelTick TickType, FAc
 	}*/
 
 	//method 3
-	// //--------
-	//for (int32 i = 0; i < Actors.Num(); i++)
-	//{
-	//	FString ActorName = Actors [ i]->GetActorNameOrLabel( );
-	//	UE_LOG( LogTemp, Warning, TEXT( "Overlapping : %s" ), *ActorName );
-	//}
+	 //--------
+	/*for (int32 i = 0; i < Actors.Num(); i++)
+	{
+		FString ActorName = Actors [ i]->GetActorNameOrLabel( );
+		UE_LOG( LogTemp, Warning, TEXT( "Overlapping : %s" ), *ActorName );
+	}*/
 
 	//method 4
 	//--------
@@ -84,7 +84,7 @@ void UTriggerComponent::TickComponent( float DeltaTime, ELevelTick TickType, FAc
 			UE_LOG( LogTemp, Warning, TEXT( "Unlocking.." ) );
 		}	
 	}*/
-	//---------------------
+#pragma endregion
 }
 
 void UTriggerComponent::SetMover( UMover* NewMover )
@@ -99,7 +99,7 @@ AActor* UTriggerComponent::GetAcceptableActor( ) const
 
 	for ( AActor* Actor : Actors )
 	{
-		if ( Actor->ActorHasTag( AcceptableActorTag ) )
+		if ( Actor->ActorHasTag( AcceptableActorTag ) && !Actor->ActorHasTag(("Grabbed") ))
 		{
 			return Actor;
 		}
